@@ -1,5 +1,6 @@
 import { Link, useRouter } from '@tanstack/react-router'
 import { ReactNode } from 'react'
+import { Button } from '../ui/Button'
 
 type LayoutProps = {
   children: ReactNode
@@ -17,17 +18,19 @@ export function Layout({ children }: LayoutProps) {
       <nav>
         <ul className='flex gap-2'>
           <Link to='/'>
-            <li className={`card font-bold ${pathname === '/' && 'active'}`}>
-              Home
+            <li>
+              <Button variant={pathname === '/' ? 'primary' : 'secondary'}>
+                Home
+              </Button>
             </li>
           </Link>
           <Link to='/pokemon'>
-            <li
-              className={`card font-bold ${
-                pathname.includes('pokemon') && 'active'
-              }`}
-            >
-              Pokemon
+            <li>
+              <Button
+                variant={pathname.includes('pokemon') ? 'primary' : 'secondary'}
+              >
+                Pokemon
+              </Button>
             </li>
           </Link>
         </ul>
