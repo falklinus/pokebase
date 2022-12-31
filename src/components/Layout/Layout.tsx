@@ -1,6 +1,8 @@
 import { Link, useRouter } from '@tanstack/react-router'
 import { ReactNode } from 'react'
-import { Button } from '../ui/Button'
+import { Button } from '@ui/Button'
+import { Sidebar } from '../Sidebar/Sidebar'
+import { Card } from '@ui/Card'
 
 type LayoutProps = {
   children: ReactNode
@@ -16,28 +18,28 @@ export function Layout({ children }: LayoutProps) {
   return (
     <div className='h-full flex flex-col gap-4'>
       <nav>
-        <ul className='flex gap-2'>
-          <Link to='/'>
+        <Card>
+          <ul className='flex gap-2'>
             <li>
-              <Button variant={pathname === '/' ? 'primary' : 'secondary'}>
-                Home
-              </Button>
+              <Link to='/'>
+                <Button active={pathname === '/'}>Home</Button>
+              </Link>
             </li>
-          </Link>
-          <Link to='/pokemon'>
             <li>
-              <Button
-                variant={pathname.includes('pokemon') ? 'primary' : 'secondary'}
-              >
-                Pokemon
-              </Button>
+              <Link to='/pokemon'>
+                <Button active={pathname.includes('pokemon')}>Pokemon</Button>
+              </Link>
             </li>
-          </Link>
-        </ul>
+          </ul>
+        </Card>
       </nav>
-      <div className='flex-grow flex gap-4 w-full'>
-        <aside className='w-60'>Hello</aside>
-        <main className='card flex-grow'>{children}</main>
+      <div className='flex-grow flex gap-4'>
+        <aside className='basis-[20%]'>
+          <Card fullHeight>
+            <Sidebar />
+          </Card>
+        </aside>
+        <main className='flex-grow'>{children}</main>
       </div>
     </div>
   )
